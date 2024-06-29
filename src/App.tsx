@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -12,6 +12,105 @@ function App() {
 
 export default App;
 
+interface Workout {
+  day: number;
+  collection: WorkoutData;
+}
+
+interface WorkoutData {
+  id: number;
+  name: string;
+  exercises: Exercises[];
+}
+
+interface Exercises {
+  name: string;
+  id: number;
+  sets: number;
+  reps: number;
+}
+
+const workoutData: Workout[] = [
+  {
+    day: 1,
+    collection: {
+      id: 0,
+      name: "Workout #1",
+      exercises: [
+        {
+          id: 0,
+          name: "Bench Press",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 1,
+          name: "Deadlift",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 2,
+          name: "Bicep Curl",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 3,
+          name: "Lateral Raise",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 4,
+          name: "Bentover Row",
+          sets: 4,
+          reps: 10,
+        },
+      ],
+    },
+  },
+  {
+    day: 2,
+    collection: {
+      id: 1,
+      name: "Workout #1",
+      exercises: [
+        {
+          id: 0,
+          name: "Incline Bench Press",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 1,
+          name: "Squat",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 2,
+          name: "Bentover Row",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 3,
+          name: "Bicep Curl",
+          sets: 4,
+          reps: 10,
+        },
+        {
+          id: 4,
+          name: "Lateral Raise",
+          sets: 4,
+          reps: 10,
+        },
+      ],
+    },
+  },
+];
+
 /**
  * Main controller for rendering workouts for the week
  * Renders title: 'Workout #N' and a show/hide for <WorkoutTable />
@@ -19,14 +118,14 @@ export default App;
  * @returns
  */
 const WorkoutContainer = () => {
-  const [workouts, setWorkouts] = useState([]);
+  const [workouts, setWorkouts] = useState<Workout[]>();
   const [showWorkout, setShowWorkout] = useState<boolean[]>(
     new Array(20).fill(false)
   );
 
   useEffect(() => {
     // Fetch workouts
-    // setWorkouts(data)
+    setWorkouts(workoutData);
   }, []);
 
   const handleShowWorkout = (id: number) => {
@@ -37,36 +136,44 @@ const WorkoutContainer = () => {
     });
   };
 
-  // if (!workouts.length) {
-  //   return <h1>Loading</h1>;
-  // }
+  if (!workouts) {
+    return <h1>Loading</h1>;
+  }
 
   return (
     <div>
       <h1>Week #1</h1>
-      <div className="flex">
-        <h2 className="mr-2">Workout #1</h2>
-        <button onClick={() => handleShowWorkout(0)}>Show</button>
-      </div>
-      {showWorkout[0] && <WorkoutTable />}
+      {workouts &&
+        workouts.map((w) => (
+          <div key={w.day}>
+            <div className="flex">
+              <h2 className="mr-2">Workout #{w.day}</h2>
+              <button onClick={() => handleShowWorkout(w.collection.id)}>
+                {showWorkout[w.collection.id] ? "Hide" : "Show"}
+              </button>
+            </div>
+            {showWorkout[w.collection.id] && (
+              <WorkoutTable exercises={w.collection.exercises} />
+            )}
+          </div>
+        ))}
     </div>
   );
 };
+
+interface WorkoutTableProps {
+  exercises: Exercises[];
+}
 
 /**
  * Show/hide toggle for this component, when title is clicked, exercise is shown
  * @returns
  */
-const WorkoutTable = () => {
+const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
   const tableHeaders = [
     { id: 0, name: "Exercise" },
     { id: 2, name: "Sets" },
     { id: 1, name: "Reps" },
-  ];
-
-  const exercies = [
-    { id: 0, exercise: "Bench Press", sets: 4, reps: 4 },
-    { id: 1, exercise: "Deadlift", sets: 4, reps: 4 },
   ];
 
   return (
@@ -82,13 +189,13 @@ const WorkoutTable = () => {
           </tr>
         </thead>
         <tbody>
-          {exercies.map((e) => (
+          {exercises.map((e) => (
             <tr key={e.id} className="border-2 border-black">
               <th scope="row" className="border-2 border-black">
-                {e.exercise}
+                {e.name}
               </th>
-              <td className="border-2 border-black">{e.reps}</td>
               <td className="border-2 border-black">{e.sets}</td>
+              <td className="border-2 border-black">{e.reps}</td>
             </tr>
           ))}
         </tbody>
