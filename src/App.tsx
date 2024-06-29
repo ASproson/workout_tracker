@@ -111,11 +111,6 @@ const workoutData: Workout[] = [
   },
 ];
 
-interface ShowWorkout {
-  day: string;
-  visible: boolean;
-}
-
 /**
  * Main controller for rendering workouts for the week
  * Renders title: 'Workout #N' and a show/hide for <WorkoutTable />
@@ -124,28 +119,23 @@ interface ShowWorkout {
  */
 const WorkoutContainer = () => {
   const [workouts, setWorkouts] = useState<Workout[]>();
-  const [showWorkout, setShowWorkout] = useState<{
-    [key: string]: ShowWorkout;
-  }>({});
+  const [showWorkout, setShowWorkout] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     // Fetch workouts
     setWorkouts(workoutData);
-    const visibleWorkouts: { [key: string]: ShowWorkout } = {};
-    workoutData.forEach((w) => {
-      visibleWorkouts[w.day] = { day: w.day, visible: false };
-    });
-    setShowWorkout(visibleWorkouts);
   }, []);
 
   const handleShowWorkout = (day: string) => {
-    setShowWorkout((prevState) => ({
-      ...prevState,
-      [day]: {
-        ...prevState[day],
-        visible: !prevState[day].visible,
-      },
-    }));
+    setShowWorkout((prevState) => {
+      const newSet = new Set(prevState);
+      if (newSet.has(day)) {
+        newSet.delete(day);
+      } else {
+        newSet.add(day);
+      }
+      return newSet;
+    });
   };
 
   if (!workouts) {
@@ -160,10 +150,10 @@ const WorkoutContainer = () => {
           <div className="flex">
             <h2 className="mr-2">Workout {w.day}</h2>
             <button onClick={() => handleShowWorkout(w.day)}>
-              {showWorkout[w.day].visible ? "Hide" : "Show"}
+              {showWorkout.has(w.day) ? "Hide" : "Show"}
             </button>
           </div>
-          {showWorkout[w.day].visible && (
+          {showWorkout.has(w.day) && (
             <WorkoutTable exercises={w.collection.exercises} />
           )}
         </div>
