@@ -167,39 +167,42 @@ interface WorkoutTableProps {
 
 /**
  * Show/hide toggle for this component, when title is clicked, exercise is shown
+ * Memoized to prevent re-renders based on state flipping
  * @returns
  */
-const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
-  const tableHeaders = [
-    { id: 0, name: "Exercise" },
-    { id: 2, name: "Sets" },
-    { id: 1, name: "Reps" },
-  ];
+const WorkoutTable: React.FC<WorkoutTableProps> = React.memo(
+  ({ exercises }) => {
+    const tableHeaders = [
+      { id: 0, name: "Exercise" },
+      { id: 2, name: "Sets" },
+      { id: 1, name: "Reps" },
+    ];
 
-  return (
-    <div>
-      <table className="border-2 border-black text-center">
-        <thead className="border-2 border-black">
-          <tr>
-            {tableHeaders.map((h) => (
-              <th key={h.id} scope="col" className="border-2 border-black">
-                {h.name}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {exercises.map((e) => (
-            <tr key={e.id} className="border-2 border-black">
-              <th scope="row" className="border-2 border-black">
-                {e.name}
-              </th>
-              <td className="border-2 border-black">{e.sets}</td>
-              <td className="border-2 border-black">{e.reps}</td>
+    return (
+      <div>
+        <table className="border-2 border-black text-center">
+          <thead className="border-2 border-black">
+            <tr>
+              {tableHeaders.map((h) => (
+                <th key={h.id} scope="col" className="border-2 border-black">
+                  {h.name}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+          </thead>
+          <tbody>
+            {exercises.map((e) => (
+              <tr key={e.id} className="border-2 border-black">
+                <th scope="row" className="border-2 border-black">
+                  {e.name}
+                </th>
+                <td className="border-2 border-black">{e.sets}</td>
+                <td className="border-2 border-black">{e.reps}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+);
