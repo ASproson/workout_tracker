@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import { Nav } from "./components/Nav";
 
 function App() {
   return <WorkoutContainer />;
@@ -11,18 +12,6 @@ export const Layout = () => {
     <div className="h-screen p-4">
       <Nav />
       <Outlet />
-    </div>
-  );
-};
-
-export const Nav = () => {
-  return (
-    <div className="space-x-4 text-center">
-      <Link to={"/workout_tracker/"}>Home</Link>
-      <Link to={"/currentWorkout"}>Current Workout</Link>
-      <Link to={"/designNewPlan"}>Design New Workout Plan</Link>
-      <Link to={"/progress"}>Progress</Link>
-      <Link to={"/prevPlans"}>Previous Plans</Link>
     </div>
   );
 };
