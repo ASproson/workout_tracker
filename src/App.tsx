@@ -141,22 +141,21 @@ const WorkoutContainer = () => {
   }
 
   return (
-    <div>
+    <div className="ml-4">
       <h1>Week #1</h1>
-      {workouts &&
-        workouts.map((w) => (
-          <div key={w.day}>
-            <div className="flex">
-              <h2 className="mr-2">Workout #{w.day}</h2>
-              <button onClick={() => handleShowWorkout(w.collection.id)}>
-                {showWorkout[w.collection.id] ? "Hide" : "Show"}
-              </button>
-            </div>
-            {showWorkout[w.collection.id] && (
-              <WorkoutTable exercises={w.collection.exercises} />
-            )}
+      {workouts.map((w) => (
+        <div key={w.day}>
+          <div className="flex">
+            <h2 className="mr-2">Workout #{w.day}</h2>
+            <button onClick={() => handleShowWorkout(w.collection.id)}>
+              {showWorkout[w.collection.id] ? "Hide" : "Show"}
+            </button>
           </div>
-        ))}
+          {showWorkout[w.collection.id] && (
+            <WorkoutTable exercises={w.collection.exercises} />
+          )}
+        </div>
+      ))}
     </div>
   );
 };
@@ -170,39 +169,37 @@ interface WorkoutTableProps {
  * Memoized to prevent re-renders based on state flipping
  * @returns
  */
-const WorkoutTable: React.FC<WorkoutTableProps> = React.memo(
-  ({ exercises }) => {
-    const tableHeaders = [
-      { id: 0, name: "Exercise" },
-      { id: 2, name: "Sets" },
-      { id: 1, name: "Reps" },
-    ];
+const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
+  const tableHeaders = [
+    { id: 0, name: "Exercise" },
+    { id: 2, name: "Sets" },
+    { id: 1, name: "Reps" },
+  ];
 
-    return (
-      <div>
-        <table className="border-2 border-black text-center">
-          <thead className="border-2 border-black">
-            <tr>
-              {tableHeaders.map((h) => (
-                <th key={h.id} scope="col" className="border-2 border-black">
-                  {h.name}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {exercises.map((e) => (
-              <tr key={e.id} className="border-2 border-black">
-                <th scope="row" className="border-2 border-black">
-                  {e.name}
-                </th>
-                <td className="border-2 border-black">{e.sets}</td>
-                <td className="border-2 border-black">{e.reps}</td>
-              </tr>
+  return (
+    <div>
+      <table className="border-2 border-black text-center">
+        <thead className="border-2 border-black">
+          <tr>
+            {tableHeaders.map((h) => (
+              <th key={h.id} scope="col" className="border-2 border-black">
+                {h.name}
+              </th>
             ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
-);
+          </tr>
+        </thead>
+        <tbody>
+          {exercises.map((e) => (
+            <tr key={e.id} className="border-2 border-black">
+              <th scope="row" className="border-2 border-black">
+                {e.name}
+              </th>
+              <td className="border-2 border-black">{e.sets}</td>
+              <td className="border-2 border-black">{e.reps}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
