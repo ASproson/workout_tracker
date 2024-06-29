@@ -27,38 +27,6 @@ export const Nav = () => {
   );
 };
 
-export const CurrentWorkout = () => {
-  return (
-    <div>
-      <h1>Current Workout</h1>
-    </div>
-  );
-};
-
-export const DesignNewWorkoutPlan = () => {
-  return (
-    <div>
-      <h1>Design New Workout Plan</h1>
-    </div>
-  );
-};
-
-export const ProgressAnalytics = () => {
-  return (
-    <div>
-      <h1>Progress</h1>
-    </div>
-  );
-};
-
-export const PreviousWorkoutPlans = () => {
-  return (
-    <div>
-      <h1>Previous Workout Plans</h1>
-    </div>
-  );
-};
-
 export default App;
 
 interface Workout {
