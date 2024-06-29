@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App, { Demo, Layout } from "./App.tsx";
+import App, {
+  CurrentWorkout,
+  DesignNewWorkoutPlan,
+  Layout,
+  PreviousWorkoutPlans,
+  ProgressAnalytics,
+} from "./App.tsx";
 import "./index.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -15,8 +21,20 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: "/demo",
-        element: <Demo />,
+        path: "/currentWorkout",
+        element: <CurrentWorkout />,
+      },
+      {
+        path: "/designNewPlan",
+        element: <DesignNewWorkoutPlan />,
+      },
+      {
+        path: "/progress",
+        element: <ProgressAnalytics />,
+      },
+      {
+        path: "/prevPlans",
+        element: <PreviousWorkoutPlans />,
       },
     ],
   },
