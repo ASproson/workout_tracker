@@ -1,4 +1,4 @@
-import { Workout } from "../App";
+import { Workout } from "./types";
 
 export const workoutData: Workout[] = [
   {

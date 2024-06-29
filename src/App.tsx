@@ -3,6 +3,7 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import { Nav } from "./components/Nav";
 import { workoutData } from "./lib/testData";
+import { Workout, WorkoutTableProps } from "./lib/types";
 
 function App() {
   return <WorkoutContainer />;
@@ -18,25 +19,6 @@ export const Layout = () => {
 };
 
 export default App;
-
-export interface Workout {
-  day: string;
-  collection: WorkoutData;
-  id: string;
-}
-
-interface WorkoutData {
-  id: number;
-  name: string;
-  exercises: Exercises[];
-}
-
-interface Exercises {
-  name: string;
-  id: number;
-  sets: number;
-  reps: number;
-}
 
 /**
  * Main controller for rendering workouts for the week
@@ -89,10 +71,6 @@ const WorkoutContainer = () => {
     </div>
   );
 };
-
-interface WorkoutTableProps {
-  exercises: Exercises[];
-}
 
 /**
  * Show/hide toggle for this component, when title is clicked, exercise is shown
