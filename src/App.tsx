@@ -123,6 +123,8 @@ const WorkoutContainer = () => {
     new Array(20).fill(false)
   );
 
+  // Rather than, const visibleWorkoutTables which is a set which takes unique id for each workout
+
   useEffect(() => {
     // Fetch workouts
     setWorkouts(workoutData);
