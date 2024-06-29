@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -13,19 +13,42 @@ function App() {
 export default App;
 
 /**
- * Main controller for centering and responsive design
+ * Main controller for rendering workouts for the week
+ * Renders title: 'Workout #N' and a show/hide for <WorkoutTable />
+ * We fill an array with false and flip the boolean based on workout id to show/hide
  * @returns
  */
 const WorkoutContainer = () => {
-  const [showWorkout, setShowWorkout] = useState(false);
+  const [workouts, setWorkouts] = useState([]);
+  const [showWorkout, setShowWorkout] = useState<boolean[]>(
+    new Array(20).fill(false)
+  );
+
+  useEffect(() => {
+    // Fetch workouts
+    // setWorkouts(data)
+  }, []);
+
+  const handleShowWorkout = (id: number) => {
+    setShowWorkout((prevState) => {
+      const newShowWorkout = [...prevState];
+      newShowWorkout[id] = !newShowWorkout[id];
+      return newShowWorkout;
+    });
+  };
+
+  // if (!workouts.length) {
+  //   return <h1>Loading</h1>;
+  // }
+
   return (
     <div>
       <h1>Week #1</h1>
       <div className="flex">
         <h2 className="mr-2">Workout #1</h2>
-        <button onClick={() => setShowWorkout(!showWorkout)}>Show</button>
+        <button onClick={() => handleShowWorkout(0)}>Show</button>
       </div>
-      {showWorkout && <WorkoutTable />}
+      {showWorkout[0] && <WorkoutTable />}
     </div>
   );
 };
