@@ -13,7 +13,7 @@ function App() {
 export default App;
 
 interface Workout {
-  day: number;
+  day: string;
   collection: WorkoutData;
 }
 
@@ -32,7 +32,7 @@ interface Exercises {
 
 const workoutData: Workout[] = [
   {
-    day: 1,
+    day: "Monday",
     collection: {
       id: 0,
       name: "Workout #1",
@@ -71,7 +71,7 @@ const workoutData: Workout[] = [
     },
   },
   {
-    day: 2,
+    day: "Wednesday",
     collection: {
       id: 1,
       name: "Workout #1",
@@ -111,6 +111,11 @@ const workoutData: Workout[] = [
   },
 ];
 
+interface ShowWorkout {
+  day: string;
+  visible: boolean;
+}
+
 /**
  * Main controller for rendering workouts for the week
  * Renders title: 'Workout #N' and a show/hide for <WorkoutTable />
@@ -119,23 +124,28 @@ const workoutData: Workout[] = [
  */
 const WorkoutContainer = () => {
   const [workouts, setWorkouts] = useState<Workout[]>();
-  const [showWorkout, setShowWorkout] = useState<boolean[]>(
-    new Array(20).fill(false)
-  );
-
-  // Rather than, const visibleWorkoutTables which is a set which takes unique id for each workout
+  const [showWorkout, setShowWorkout] = useState<{
+    [key: string]: ShowWorkout;
+  }>({});
 
   useEffect(() => {
     // Fetch workouts
     setWorkouts(workoutData);
+    const visibleWorkouts: { [key: string]: ShowWorkout } = {};
+    workoutData.forEach((w) => {
+      visibleWorkouts[w.day] = { day: w.day, visible: false };
+    });
+    setShowWorkout(visibleWorkouts);
   }, []);
 
-  const handleShowWorkout = (id: number) => {
-    setShowWorkout((prevState) => {
-      const newShowWorkout = [...prevState];
-      newShowWorkout[id] = !newShowWorkout[id];
-      return newShowWorkout;
-    });
+  const handleShowWorkout = (day: string) => {
+    setShowWorkout((prevState) => ({
+      ...prevState,
+      [day]: {
+        ...prevState[day],
+        visible: !prevState[day].visible,
+      },
+    }));
   };
 
   if (!workouts) {
@@ -148,12 +158,12 @@ const WorkoutContainer = () => {
       {workouts.map((w) => (
         <div key={w.day}>
           <div className="flex">
-            <h2 className="mr-2">Workout #{w.day}</h2>
-            <button onClick={() => handleShowWorkout(w.collection.id)}>
-              {showWorkout[w.collection.id] ? "Hide" : "Show"}
+            <h2 className="mr-2">Workout {w.day}</h2>
+            <button onClick={() => handleShowWorkout(w.day)}>
+              {showWorkout[w.day].visible ? "Hide" : "Show"}
             </button>
           </div>
-          {showWorkout[w.collection.id] && (
+          {showWorkout[w.day].visible && (
             <WorkoutTable exercises={w.collection.exercises} />
           )}
         </div>
