@@ -15,6 +15,7 @@ export default App;
 interface Workout {
   day: string;
   collection: WorkoutData;
+  id: string;
 }
 
 interface WorkoutData {
@@ -32,6 +33,7 @@ interface Exercises {
 
 const workoutData: Workout[] = [
   {
+    id: "0",
     day: "Monday",
     collection: {
       id: 0,
@@ -71,6 +73,7 @@ const workoutData: Workout[] = [
     },
   },
   {
+    id: "1",
     day: "Wednesday",
     collection: {
       id: 1,
@@ -126,13 +129,13 @@ const WorkoutContainer = () => {
     setWorkouts(workoutData);
   }, []);
 
-  const handleShowWorkout = (day: string) => {
+  const handleShowWorkout = (id: string) => {
     setShowWorkout((prevState) => {
       const newSet = new Set(prevState);
-      if (newSet.has(day)) {
-        newSet.delete(day);
+      if (newSet.has(id)) {
+        newSet.delete(id);
       } else {
-        newSet.add(day);
+        newSet.add(id);
       }
       return newSet;
     });
@@ -149,11 +152,11 @@ const WorkoutContainer = () => {
         <div key={w.day}>
           <div className="flex">
             <h2 className="mr-2">Workout {w.day}</h2>
-            <button onClick={() => handleShowWorkout(w.day)}>
-              {showWorkout.has(w.day) ? "Hide" : "Show"}
+            <button onClick={() => handleShowWorkout(w.id)}>
+              {showWorkout.has(w.id) ? "Hide" : "Show"}
             </button>
           </div>
-          {showWorkout.has(w.day) && (
+          {showWorkout.has(w.id) && (
             <WorkoutTable exercises={w.collection.exercises} />
           )}
         </div>
