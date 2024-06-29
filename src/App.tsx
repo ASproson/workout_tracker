@@ -178,6 +178,7 @@ const WorkoutContainer = () => {
     setWorkouts(workoutData);
   }, []);
 
+  // Might be best having something to save this permanently
   const handleShowWorkout = (id: string) => {
     setShowWorkout((prevState) => {
       const newSet = new Set(prevState);
