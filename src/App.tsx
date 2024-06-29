@@ -1,19 +1,35 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 function App() {
+  return <WorkoutContainer />;
+}
+
+export const Layout = () => {
   return (
     <div className="h-screen p-4">
-      <WorkoutContainer />
+      <Nav />
+      <Outlet />
+    </div>
+  );
+};
+
+export const Nav = () => {
+  return (
+    <div>
       <Link to={"/workout_tracker/"}>Home</Link>
       <Link to={"/demo"}>Demo</Link>
     </div>
   );
-}
+};
 
 export const Demo = () => {
-  return <h1>DEMO</h1>;
+  return (
+    <div>
+      <h1>DEMO</h1>
+    </div>
+  );
 };
 
 export default App;
