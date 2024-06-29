@@ -3,8 +3,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="h-screen ">
-      <h1 className=" text-center">Testing workflow push</h1>
+    <div className="h-screen p-4">
       <WorkoutContainer />
     </div>
   );
@@ -146,7 +145,7 @@ const WorkoutContainer = () => {
   }
 
   return (
-    <div className="ml-4">
+    <div>
       <h1>Week #1</h1>
       {workouts.map((w) => (
         <div key={w.day}>
@@ -183,7 +182,7 @@ const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
 
   return (
     <div>
-      <table className="border-2 border-black text-center">
+      <table className="border-2 border-black text-center w-full">
         <thead className="border-2 border-black">
           <tr>
             {tableHeaders.map((h) => (
@@ -196,7 +195,10 @@ const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
         <tbody>
           {exercises.map((e) => (
             <tr key={e.id} className="border-2 border-black">
-              <th scope="row" className="border-2 border-black">
+              <th
+                scope="row"
+                className="border-2 border-black text-left max-w-4"
+              >
                 {e.name}
               </th>
               <td className="border-2 border-black">{e.sets}</td>
