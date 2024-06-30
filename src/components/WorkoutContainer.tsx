@@ -79,18 +79,19 @@ export const WorkoutContainer = () => {
   );
 };
 
+const tableHeaders = [
+  { id: 0, name: "Exercise" },
+  { id: 1, name: "Sets" },
+  { id: 2, name: "Reps" },
+  { id: 3, name: "Weight" },
+];
+
 /**
  * Show/hide toggle for this component, when title is clicked, exercise is shown
  * Memoized to prevent re-renders based on state flipping
  * @returns
  */
 const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
-  const tableHeaders = [
-    { id: 0, name: "Exercise" },
-    { id: 2, name: "Sets" },
-    { id: 1, name: "Reps" },
-  ];
-
   return (
     <div>
       <table className="border-2 border-black text-center w-full">
@@ -104,8 +105,8 @@ const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
           </tr>
         </thead>
         <tbody>
-          {exercises.map((e) => (
-            <tr key={e.exercise_id} className="border-2 border-black">
+          {exercises.map((e, idx) => (
+            <tr key={e.exercise_id + idx} className="border-2 border-black">
               <th
                 scope="row"
                 className="border-2 border-black text-left max-w-4"
@@ -114,6 +115,7 @@ const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
               </th>
               <td className="border-2 border-black">{e.sets}</td>
               <td className="border-2 border-black">{e.reps}</td>
+              <td className="border-2 border-black">{e.weight}</td>
             </tr>
           ))}
         </tbody>
