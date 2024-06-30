@@ -11,20 +11,41 @@ import { WorkoutProgram, WorkoutTableProps } from "../lib/types";
 export const WorkoutContainer = () => {
   const [workouts, setWorkouts] = useState<WorkoutProgram>();
   const [showWorkout, setShowWorkout] = useState<Set<string>>(new Set());
+  const [currentWeek, setCurrentWeek] = useState<{
+    week_id: string;
+    week_name: number;
+    week_completed: boolean;
+  }>();
 
   useEffect(() => {
     // Fetch workouts
     setWorkouts(workoutData);
+    const currWeek = workouts?.weeks.find((week) => !week.week_completed);
+    if (currWeek) {
+      setCurrentWeek({
+        week_id: currWeek.week_id,
+        week_name: currWeek.week_name,
+        week_completed: currWeek.week_completed,
+      });
+    } else {
+      // All weeks are completed, show final week (possibly change later)
+      const lastWeek = workoutData.weeks[workoutData.weeks.length - 1];
+      setCurrentWeek({
+        week_id: lastWeek.week_id,
+        week_name: lastWeek.week_name,
+        week_completed: lastWeek.week_completed,
+      });
+    }
   }, []);
 
   // Might be best having something to save this permanently
-  const handleShowWorkout = (id: string) => {
+  const handleShowWorkout = (day_id: string) => {
     setShowWorkout((prevState) => {
       const newSet = new Set(prevState);
-      if (newSet.has(id)) {
-        newSet.delete(id);
+      if (newSet.has(day_id)) {
+        newSet.delete(day_id);
       } else {
-        newSet.add(id);
+        newSet.add(day_id);
       }
       return newSet;
     });
@@ -37,21 +58,23 @@ export const WorkoutContainer = () => {
   return (
     <div>
       <h1>
-        {workouts.program_name} {workouts.week.week_name}
+        {workouts.program_name} - Week {currentWeek?.week_name}
       </h1>
-      {workouts.week.workouts.map((w) => (
-        <div key={w.day_id}>
-          <div className="flex">
-            <h2 className="mr-2">Workout {w.day}</h2>
-            <button onClick={() => handleShowWorkout(w.day_id)}>
-              {showWorkout.has(w.day_id) ? "Hide" : "Show"}
-            </button>
+      {workouts.weeks
+        .find((week) => week.week_id === currentWeek?.week_id)
+        ?.workouts.map((w) => (
+          <div key={w.day_id}>
+            <div className="flex">
+              <h2 className="mr-2">Workout {w.day}</h2>
+              <button onClick={() => handleShowWorkout(w.day_id)}>
+                {showWorkout.has(w.day_id) ? "Hide" : "Show"}
+              </button>
+            </div>
+            {showWorkout.has(w.day_id) && (
+              <WorkoutTable exercises={w.exercises} />
+            )}
           </div>
-          {showWorkout.has(w.day_id) && (
-            <WorkoutTable exercises={w.exercises} />
-          )}
-        </div>
-      ))}
+        ))}
     </div>
   );
 };
