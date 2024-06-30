@@ -68,7 +68,7 @@ export const WorkoutContainer = () => {
         ?.workouts.map((w) => (
           <div key={w.day_id}>
             <div className="flex">
-              <h2 className="mr-2">Workout: {w.day}</h2>
+              <h2 className="mr-2 my-2">Workout {w.day}</h2>
               <button onClick={() => handleShowWorkout(w.day_id)}>
                 {showWorkout.has(w.day_id) ? "Hide" : "Show"}
               </button>
