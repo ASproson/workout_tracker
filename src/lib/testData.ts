@@ -2,7 +2,7 @@ import { WorkoutProgram } from "./types";
 
 // When a week is complete we then automatically create the next, ++'ing prev week's reps
 // We want to cache each program
-export const workoutData: WorkoutProgram = {
+export const twoDayChestBackSideDeltFocus: WorkoutProgram = {
   program_name: "Chest/Back/Side Delt Focus",
   object_id: "awd123fas", // DB generated
   is_current: false,
@@ -60,7 +60,7 @@ export const workoutData: WorkoutProgram = {
         },
         {
           day_id: "asdgawawd315", // DB generated
-          day: "Wednesday", // User generated
+          day: "Thursday", // User generated
           day_completed: false,
           exercises: [
             {

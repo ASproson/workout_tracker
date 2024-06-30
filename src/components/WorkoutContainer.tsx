@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { workoutData } from "../lib/testData";
+import { twoDayChestBackSideDeltFocus } from "../lib/testData";
 import { WorkoutProgram, WorkoutTableProps } from "../lib/types";
 
 /**
@@ -19,7 +19,7 @@ export const WorkoutContainer = () => {
 
   useEffect(() => {
     // Fetch workouts
-    setWorkouts(workoutData);
+    setWorkouts(twoDayChestBackSideDeltFocus);
     const currWeek = workouts?.weeks.find((week) => !week.week_completed);
     if (currWeek) {
       setCurrentWeek({
@@ -29,7 +29,10 @@ export const WorkoutContainer = () => {
       });
     } else {
       // All weeks are completed, show final week (possibly change later)
-      const lastWeek = workoutData.weeks[workoutData.weeks.length - 1];
+      const lastWeek =
+        twoDayChestBackSideDeltFocus.weeks[
+          twoDayChestBackSideDeltFocus.weeks.length - 1
+        ];
       setCurrentWeek({
         week_id: lastWeek.week_id,
         week_name: lastWeek.week_name,
@@ -65,7 +68,7 @@ export const WorkoutContainer = () => {
         ?.workouts.map((w) => (
           <div key={w.day_id}>
             <div className="flex">
-              <h2 className="mr-2">Workout {w.day}</h2>
+              <h2 className="mr-2">Workout: {w.day}</h2>
               <button onClick={() => handleShowWorkout(w.day_id)}>
                 {showWorkout.has(w.day_id) ? "Hide" : "Show"}
               </button>
