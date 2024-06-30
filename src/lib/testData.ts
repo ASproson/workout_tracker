@@ -7,6 +7,7 @@ export const workoutData: WorkoutProgram = {
   object_id: "awd123fas", // DB generated
   is_current: false,
   program_complete: false,
+  automatic_progression: true,
   duration: 12,
   weeks: [
     {

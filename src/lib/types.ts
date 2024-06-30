@@ -4,6 +4,7 @@ export interface WorkoutProgram {
   is_current: boolean;
   program_complete: boolean;
   duration: number;
+  automatic_progression: boolean;
   weeks: WorkoutWeek[];
 }
 
