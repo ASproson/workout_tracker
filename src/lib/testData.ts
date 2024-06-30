@@ -7,6 +7,7 @@ export const workoutData: WorkoutProgram = {
   object_id: "awd123fas", // DB generated
   is_current: false,
   program_complete: false,
+  duration: 12,
   weeks: [
     {
       week_id: "awdasd2312a", // DB generated
@@ -22,12 +23,15 @@ export const workoutData: WorkoutProgram = {
               name: "Bench Press",
               sets: 4,
               reps: 10,
+              weight: 10.5,
               exercise_id: "ex1",
             },
             {
               name: "Deadlift",
               sets: 4,
               reps: 10,
+              weight: 10.5,
+
               exercise_id: "ex3",
             },
             {
@@ -35,18 +39,21 @@ export const workoutData: WorkoutProgram = {
               sets: 4,
               reps: 10,
               exercise_id: "ex3",
+              weight: 10.5,
             },
             {
               name: "Lateral Raise",
               sets: 4,
               reps: 10,
               exercise_id: "ex4",
+              weight: 10.5,
             },
             {
               name: "Bentover Row",
               sets: 4,
               reps: 10,
               exercise_id: "ex5",
+              weight: 10.5,
             },
           ],
         },
@@ -60,30 +67,35 @@ export const workoutData: WorkoutProgram = {
               sets: 4,
               reps: 10,
               exercise_id: "ex6",
+              weight: 10.5,
             },
             {
               name: "Squat",
               sets: 4,
               reps: 10,
               exercise_id: "ex7",
+              weight: 10.5,
             },
             {
               name: "Bentover Row",
               sets: 4,
               reps: 10,
               exercise_id: "ex5",
+              weight: 10.5,
             },
             {
               name: "Bicep Curl",
               sets: 4,
               reps: 10,
               exercise_id: "ex3",
+              weight: 10.5,
             },
             {
               name: "Lateral Raise",
               sets: 4,
               reps: 10,
               exercise_id: "ex4",
+              weight: 10.5,
             },
           ],
         },

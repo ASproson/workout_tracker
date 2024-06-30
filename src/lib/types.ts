@@ -3,6 +3,7 @@ export interface WorkoutProgram {
   object_id: string;
   is_current: boolean;
   program_complete: boolean;
+  duration: number;
   weeks: WorkoutWeek[];
 }
 
@@ -25,6 +26,7 @@ interface Exercises {
   sets: number;
   reps: number;
   exercise_id: string;
+  weight: number;
 }
 
 export interface WorkoutTableProps {
