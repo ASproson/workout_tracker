@@ -24,8 +24,15 @@ interface Exercises {
   name: string;
   sets: number;
   reps: number;
+  exercise_id: string;
 }
 
 export interface WorkoutTableProps {
   exercises: Exercises[];
+}
+
+export interface ExerciseList {
+  name: string;
+  id: string;
+  muscleGroup: string;
 }
