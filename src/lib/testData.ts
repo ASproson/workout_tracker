@@ -1,6 +1,7 @@
 import { WorkoutProgram } from "./types";
 
 // When a week is complete we then automatically create the next, ++'ing prev week's reps
+// We want to cache each program
 export const workoutData: WorkoutProgram = {
   program_name: "Chest/Back/Side Delt Focus",
   object_id: "awd123fas", // DB generated
