@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { workoutData } from "../lib/testData";
-import { Workout, WorkoutTableProps } from "../lib/types";
+import { WorkoutProgram, WorkoutTableProps } from "../lib/types";
 
 /**
  * Main controller for rendering workouts for the week
@@ -9,7 +9,7 @@ import { Workout, WorkoutTableProps } from "../lib/types";
  * @returns
  */
 export const WorkoutContainer = () => {
-  const [workouts, setWorkouts] = useState<Workout[]>();
+  const [workouts, setWorkouts] = useState<WorkoutProgram>();
   const [showWorkout, setShowWorkout] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -36,17 +36,19 @@ export const WorkoutContainer = () => {
 
   return (
     <div>
-      <h1>Week #1</h1>
-      {workouts.map((w) => (
-        <div key={w.day}>
+      <h1>
+        {workouts.program_name} {workouts.week.week_name}
+      </h1>
+      {workouts.week.workouts.map((w) => (
+        <div key={w.day_id}>
           <div className="flex">
             <h2 className="mr-2">Workout {w.day}</h2>
-            <button onClick={() => handleShowWorkout(w.id)}>
-              {showWorkout.has(w.id) ? "Hide" : "Show"}
+            <button onClick={() => handleShowWorkout(w.day_id)}>
+              {showWorkout.has(w.day_id) ? "Hide" : "Show"}
             </button>
           </div>
-          {showWorkout.has(w.id) && (
-            <WorkoutTable exercises={w.collection.exercises} />
+          {showWorkout.has(w.day_id) && (
+            <WorkoutTable exercises={w.exercises} />
           )}
         </div>
       ))}
@@ -80,7 +82,7 @@ const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
         </thead>
         <tbody>
           {exercises.map((e) => (
-            <tr key={e.id} className="border-2 border-black">
+            <tr key={e.name} className="border-2 border-black">
               <th
                 scope="row"
                 className="border-2 border-black text-left max-w-4"
