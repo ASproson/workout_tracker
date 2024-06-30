@@ -105,7 +105,7 @@ const WorkoutTable: React.FC<WorkoutTableProps> = ({ exercises }) => {
         </thead>
         <tbody>
           {exercises.map((e) => (
-            <tr key={e.name} className="border-2 border-black">
+            <tr key={e.exercise_id} className="border-2 border-black">
               <th
                 scope="row"
                 className="border-2 border-black text-left max-w-4"
