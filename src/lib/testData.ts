@@ -6,75 +6,77 @@ export const workoutData: WorkoutProgram = {
   object_id: "awd123fas", // DB generated
   is_current: false,
   program_complete: false,
-  week: {
-    week_id: "awdasd2312a", // DB generated
-    week_name: 1, // `${program_name} week_name`
-    week_completed: false,
-    workouts: [
-      {
-        day_id: "dawdasd213", // DB generated
-        day: "Monday", // User generated
-        day_completed: true,
-        exercises: [
-          {
-            name: "Bench Press",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Deadlift",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Bicep Curl",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Lateral Raise",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Bentover Row",
-            sets: 4,
-            reps: 10,
-          },
-        ],
-      },
-      {
-        day_id: "asdgawawd315", // DB generated
-        day: "Wednesday", // User generated
-        day_completed: false,
-        exercises: [
-          {
-            name: "Incline Bench Press",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Squat",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Bentover Row",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Bicep Curl",
-            sets: 4,
-            reps: 10,
-          },
-          {
-            name: "Lateral Raise",
-            sets: 4,
-            reps: 10,
-          },
-        ],
-      },
-    ],
-  },
+  weeks: [
+    {
+      week_id: "awdasd2312a", // DB generated
+      week_name: 1, // `${program_name} week_name`
+      week_completed: false,
+      workouts: [
+        {
+          day_id: "dawdasd213", // DB generated
+          day: "Monday", // User generated
+          day_completed: true,
+          exercises: [
+            {
+              name: "Bench Press",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Deadlift",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Bicep Curl",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Lateral Raise",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Bentover Row",
+              sets: 4,
+              reps: 10,
+            },
+          ],
+        },
+        {
+          day_id: "asdgawawd315", // DB generated
+          day: "Wednesday", // User generated
+          day_completed: false,
+          exercises: [
+            {
+              name: "Incline Bench Press",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Squat",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Bentover Row",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Bicep Curl",
+              sets: 4,
+              reps: 10,
+            },
+            {
+              name: "Lateral Raise",
+              sets: 4,
+              reps: 10,
+            },
+          ],
+        },
+      ],
+    },
+  ],
 };

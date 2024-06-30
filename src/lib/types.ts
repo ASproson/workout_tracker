@@ -3,7 +3,7 @@ export interface WorkoutProgram {
   object_id: string;
   is_current: boolean;
   program_complete: boolean;
-  week: WorkoutWeek;
+  weeks: WorkoutWeek[];
 }
 
 interface WorkoutWeek {
