@@ -5,3 +5,9 @@ export const DesignNewWorkoutPlan = () => {
     </div>
   );
 };
+
+export const WorkoutPlanBuilder = () => {};
+
+export const PremadeWorkoutPlans = () => {};
+
+export const CustomWorkoutPlans = () => {};
