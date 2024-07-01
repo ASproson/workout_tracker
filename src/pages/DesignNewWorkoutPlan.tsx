@@ -49,7 +49,7 @@ export const PremadeWorkoutPlans = () => {
     {
       name: '2 Day Plans',
       splits: [
-        'Full Body',
+        'Full Body', // Add the list of exercises across days here? >> Preview/Select, worth doing a modal?
         'Upper/Lower',
         'Push/Pull',
         'Arm Builder',
@@ -113,14 +113,14 @@ export const PremadeWorkoutPlans = () => {
   return (
     <div>
       <h1>Premade</h1>
-      <ul>
+      <ul className="text-left">
         {plans.map((p) => (
           <li>
             <button key={p.name} onClick={() => handleShowPlan(p.name)}>
               {p.name}
             </button>
             {showPlan.has(p.name) && (
-              <ul>
+              <ul className="ml-4">
                 {p.splits.map((s) => (
                   <li>{s}</li>
                 ))}
