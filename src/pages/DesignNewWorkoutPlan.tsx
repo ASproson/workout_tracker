@@ -31,6 +31,7 @@ export const WorkoutPlanBuilder = () => {
         >
           Premade Workout Plans
         </button>
+        {premade && <PremadeWorkoutPlans />}
       </div>
       <div className="mb-4">
         <button
@@ -42,7 +43,6 @@ export const WorkoutPlanBuilder = () => {
           Create New Workout Plan
         </button>
       </div>
-      {premade && <PremadeWorkoutPlans />}
       {custom && <CustomWorkoutPlans />}
     </div>
   );
@@ -50,7 +50,6 @@ export const WorkoutPlanBuilder = () => {
 
 export const PremadeWorkoutPlans = () => (
   <div>
-    <h1>Premade Workout Plans</h1>
     <ul className="text-left">
       {workoutProgramsTable.map((categoryData, index) => (
         <WorkoutCategory
