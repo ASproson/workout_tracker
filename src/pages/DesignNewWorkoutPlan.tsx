@@ -71,7 +71,7 @@ const WorkoutCategory = ({ category, plans }: WorkoutCategoryProps) => {
     <li>
       <button onClick={handleToggle}>{category}</button>
       {showPlan && (
-        <ul className="ml-4">
+        <ul className="ml-4 my-2">
           {plans.map((plan) => (
             <WorkoutPlan key={plan.program_id} plan={plan} />
           ))}
@@ -85,7 +85,10 @@ const WorkoutPlan = ({ plan }: WorkoutPlansProps) => {
   const [showPlan, setShowPlan] = useState(false);
   return (
     <li key={plan.program_id} onClick={() => setShowPlan(!showPlan)}>
-      <button>{plan.program_name}</button>
+      <div className="flex justify-between">
+        <button>{plan.program_name}</button>
+        <button className="mr-2">Select</button>
+      </div>
       {showPlan && (
         <>
           <ExerciseList
