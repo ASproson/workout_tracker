@@ -8,21 +8,21 @@ export interface WorkoutProgram {
   weeks: WorkoutWeek[];
 }
 
-interface WorkoutWeek {
+export interface WorkoutWeek {
   week_id: string;
   week_name: number;
   week_completed: boolean;
   workouts: DayWorkout[];
 }
 
-interface DayWorkout {
+export interface DayWorkout {
   day_id: string;
   day: string;
   day_completed: boolean;
   exercises: Exercises[];
 }
 
-interface Exercises {
+export interface Exercises {
   name: string;
   sets: number;
   reps: number;
