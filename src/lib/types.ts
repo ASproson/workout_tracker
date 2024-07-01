@@ -39,3 +39,31 @@ export interface ExerciseList {
   id: string;
   muscleGroup: string;
 }
+
+export interface WorkoutCategoryProps {
+  category: string;
+  plans: Plan[];
+}
+
+export interface Plan {
+  program_name: string;
+  program_id: string;
+  program: Program;
+}
+
+export interface Program {
+  description: string;
+  duration: number;
+  day_one_exercises: string[];
+  day_two_exercises: string[];
+}
+
+export interface WorkoutPlansProps {
+  plan: Plan;
+}
+
+export interface ExerciseListProps {
+  title: string;
+  exercises: string[];
+  description?: string;
+}
