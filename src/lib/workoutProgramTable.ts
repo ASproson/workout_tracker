@@ -1,3 +1,6 @@
+import { WorkoutCategoryProps } from "./types";
+
+// Do we want to add filtering based on machine use?
 export const twoDayWorkoutPrograms = [
   {
     program_name: "Full Body",
@@ -48,4 +51,12 @@ export const twoDayWorkoutPrograms = [
       ],
     },
   },
+];
+
+export const workoutProgramsTable: WorkoutCategoryProps[] = [
+  { category: "2 Day Plans", plans: twoDayWorkoutPrograms },
+  { category: "3 Day Plans", plans: twoDayWorkoutPrograms },
+  { category: "4 Day Plans", plans: twoDayWorkoutPrograms },
+  { category: "5 Day Plans", plans: twoDayWorkoutPrograms },
+  { category: "6 Day Plans", plans: twoDayWorkoutPrograms },
 ];
